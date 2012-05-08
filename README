@@ -1,6 +1,6 @@
 JrJackson
 
-A JRuby library wrapping the JAVA Jackson jars
+A JRuby library wrapping the Java Jackson JARs.
 
 provides:
 
