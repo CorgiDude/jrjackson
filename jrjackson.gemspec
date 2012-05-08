@@ -19,22 +19,21 @@ Gem::Specification.new do |s|
     benchmarking/benchmark.rb
     jrjackson.gemspec
     lib/jrjackson.rb
-    lib/jrjackson/jackson-core-asl-1.9.5.jar
-    lib/jrjackson/jackson-mapper-asl-1.9.5.jar
-    lib/jrjackson/jackson-smile-1.9.5.jar
-    lib/jrjackson/jrjackson.rb
-    lib/jrjackson/rubify.rb
-    lib/jrjackson/rubify_with_symbol_keys.rb
-    lib/jrjackson/version.rb
-    lib/jrjackson_r.rb
-    lib/jrjackson_r_sym.rb
+    lib/jr_jackson.rb
+    lib/jr_jackson/json.rb
+    lib/jr_jackson/smile.rb
+    lib/jr_jackson/version.rb
+    lib/jr_jackson/deserializers/rubify.rb
+    lib/jr_jackson/deserializers/symbolize.rb
+    lib/vendor/jackson-core-asl-1.9.5.jar
+    lib/vendor/jackson-mapper-asl-1.9.5.jar
+    lib/vendor/jackson-smile-1.9.5.jar
     profiling/profiled.rb
   ]
   # = MANIFEST =
 
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
-  s.add_development_dependency  'awesome_print',      '~> 0.4.0'
-
+  s.add_development_dependency 'awesome_print', '~> 0.4.0'
 end

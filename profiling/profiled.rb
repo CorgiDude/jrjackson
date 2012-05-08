@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'jruby-prof'
-require 'jrjackson_r'
+require 'jrjackson'
 
 js = %({"one":1,"two":"deux","three":[333.333,66.666]})
 

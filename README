@@ -1,44 +1,73 @@
-jrjackson
+JrJackson
 
-a jruby library wrapping the JAVA jackson jars
+A JRuby library wrapping the JAVA Jackson jars
 
 provides:
 
-JrJackson::Json.generate(obj) -> json string
-JrJackson::Json.parse(str) -> hash like object
+JrJackson.json.generate(obj) -> json string
+JrJackson.json.parse(str) -> hash like object
 
-JrJackson::Smile.generate obj -> smile string
-JrJackson::Smile.parse smile_str -> hash like object
+JrJackson.smile.generate obj -> smile string
+JrJackson.smile.parse smile_str -> hash like object
 
 
 Credit to Chuck Remes for the benchmark and initial
 investigation when the jruby, json gem and the jackson
 libraries were young.
 
-I compared json-jruby 1.5.1 and jackson/smile 1.9.5 on jruby 1.6.7 and Java 7
+I compared json-jruby 1.7.1 and jackson/smile 1.9.5 on jruby 1.6.7
+
+Benchmark for small hash (6000 iterations)
+==========================================
+
+Rehearsal ---------------------------------------------------------------------
+jackson generate:                   0.518000   0.000000   0.518000 (  0.518000)
+smile generate:                     0.743000   0.000000   0.743000 (  0.743000)
+ruby fast generate:                 0.359000   0.000000   0.359000 (  0.359000)
+ruby generate:                      0.160000   0.000000   0.160000 (  0.160000)
+jackson parse:                      0.463000   0.000000   0.463000 (  0.463000)
+jackson parse (rubyify):            2.016000   0.000000   2.016000 (  2.016000)
+jackson parse (symbolize):          0.474000   0.000000   0.474000 (  0.474000)
+smile parse:                        1.165000   0.000000   1.165000 (  1.165000)
+ruby parse:                         0.871000   0.000000   0.871000 (  0.871000)
+------------------------------------------------------------ total: 6.769000sec
 
                                         user     system      total        real
-jackson generate:                   0.756000   0.000000   0.756000 (  0.756000)
-smile generate:                     0.530000   0.000000   0.530000 (  0.530000)
-ruby generate:                      2.754000   0.000000   2.754000 (  2.754000)
-jackson parse:                      0.630000   0.000000   0.630000 (  0.630000)
-smile parse:                        0.368000   0.000000   0.368000 (  0.368000)
-ruby parse:                         2.102000   0.000000   2.102000 (  2.102000)
+jackson generate:                   0.175000   0.000000   0.175000 (  0.175000)
+smile generate:                     0.363000   0.000000   0.363000 (  0.363000)
+ruby fast generate:                 0.207000   0.000000   0.207000 (  0.203000)
+ruby generate:                      0.116000   0.000000   0.116000 (  0.116000)
+jackson parse:                      0.080000   0.000000   0.080000 (  0.080000)
+jackson parse (rubyify):            0.327000   0.000000   0.327000 (  0.327000)
+jackson parse (symbolize):          0.363000   0.000000   0.363000 (  0.363000)
+smile parse:                        0.186000   0.000000   0.186000 (  0.186000)
+ruby parse:                         0.312000   0.000000   0.312000 (  0.312000)
 
-Variants:
 
-jrjackson.rb
-  this variant is the fastest but the parse function will
-  return Java ArrayList instead of Ruby Array and
-  Java LinkedHashMap instead of Ruby Hash.
-  In Jruby 1.6.0+, these java classes have most if not all
-  of the behaviour of the corresponding Ruby classes
 
-jrjackson_r.rb
-  If you absolutely need Ruby Objects then use this variant
-  It parses a little bit slower than the above but
-  returns Ruby Array and Hash objects
 
-jrjackson_r_sym.rb
-  Will give you symbols for hash keys instead of strings
+Benchmark for big hash (6000 iterations)
+==========================================
 
+Rehearsal ---------------------------------------------------------------------
+jackson generate:                   0.954000   0.000000   0.954000 (  0.954000)
+smile generate:                     0.317000   0.000000   0.317000 (  0.317000)
+ruby fast generate:                 0.571000   0.000000   0.571000 (  0.571000)
+ruby generate:                      0.561000   0.000000   0.561000 (  0.561000)
+jackson parse:                      0.561000   0.000000   0.561000 (  0.561000)
+jackson parse (rubyify):            1.167000   0.000000   1.167000 (  1.167000)
+jackson parse (symbolize):          1.186000   0.000000   1.186000 (  1.186000)
+smile parse:                        0.221000   0.000000   0.221000 (  0.221000)
+ruby parse:                         1.651000   0.000000   1.651000 (  1.651000)
+------------------------------------------------------------ total: 7.189000sec
+
+                                        user     system      total        real
+jackson generate:                   0.918000   0.000000   0.918000 (  0.918000)
+smile generate:                     0.262000   0.000000   0.262000 (  0.261000)
+ruby fast generate:                 0.539000   0.000000   0.539000 (  0.539000)
+ruby generate:                      0.545000   0.000000   0.545000 (  0.545000)
+jackson parse:                      0.523000   0.000000   0.523000 (  0.523000)
+jackson parse (rubyify):            1.143000   0.000000   1.143000 (  1.143000)
+jackson parse (symbolize):          1.183000   0.000000   1.183000 (  1.183000)
+smile parse:                        0.178000   0.000000   0.178000 (  0.178000)
+ruby parse:                         1.678000   0.000000   1.678000 (  1.679000)
